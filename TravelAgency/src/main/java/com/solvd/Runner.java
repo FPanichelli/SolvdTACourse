@@ -31,7 +31,7 @@ public class Runner {
         travelAgency.addFlight("Boeing", "AerolinasArgentinas", 7206, 200, false);
 
         travelAgency.addHotelRoom("Premium", 6, true, true, "Grand Minsk Hotel", 601, true, true, true, 500, minsk);
-        travelAgency.addHotelRoom("Economy", 2, true, true,"Grand Minsk Hotel" ,-101, false, true, true, 300, minsk);
+        travelAgency.addHotelRoom("Economy", 2, true, true, "Grand Minsk Hotel", -101, false, true, true, 300, minsk);
 
         travelAgency.addApartment("Centric", 2, true, true, "Fake Street 123", true, false, 150, minsk);
         travelAgency.addApartment("Modest", 1, true, false, "1578 Somewhere Blvd", false, false, 50, minsk);
