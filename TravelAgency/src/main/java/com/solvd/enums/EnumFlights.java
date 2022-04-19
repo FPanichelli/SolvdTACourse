@@ -1,6 +1,4 @@
-package enums;
-
-import com.solvd.travelagency.TravelAgency;
+package com.solvd.enums;
 
 public enum EnumFlights {
     BELARUS_AIRWAYS(1),

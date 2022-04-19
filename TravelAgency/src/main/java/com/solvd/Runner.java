@@ -7,7 +7,6 @@ import com.solvd.travelagency.*;
 import com.solvd.vehicles.*;
 import com.solvd.exceptions.*;
 import com.solvd.generics.*;
-import enums.EnumFlights;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
