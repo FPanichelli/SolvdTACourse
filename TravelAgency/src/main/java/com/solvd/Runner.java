@@ -30,8 +30,8 @@ public class Runner {
         travelAgency.addFlight("Boeing", "QatarAir", 1238, 550, false);
         travelAgency.addFlight("Boeing", "AerolinasArgentinas", 7206, 200, false);
 
-        travelAgency.addHotelRoom("Premium", 6, true, true, 601, true, true, true, 500, minsk);
-        travelAgency.addHotelRoom("Economy", 2, true, true, -101, false, true, true, 300, minsk);
+        travelAgency.addHotelRoom("Premium", 6, true, true, "Grand Minsk Hotel", 601, true, true, true, 500, minsk);
+        travelAgency.addHotelRoom("Economy", 2, true, true,"Grand Minsk Hotel" ,-101, false, true, true, 300, minsk);
 
         travelAgency.addApartment("Centric", 2, true, true, "Fake Street 123", true, false, 150, minsk);
         travelAgency.addApartment("Modest", 1, true, false, "1578 Somewhere Blvd", false, false, 50, minsk);
@@ -271,13 +271,24 @@ public class Runner {
         LOGGER.info("-------------------------------------------------------------------------------------");
 
         LOGGER.info("Would you like to Check in?");
-        LOGGER.info("\n" + "1. Yes" + "\n" + "2. No, i'll do it later");
+        LOGGER.info("1. Yes | 2. No, i'll do it later");
 
         choice = scClient1.nextInt();
         switch (choice) {
             case 1:
                 selectedFlight.checkIn(client1);
+                CheckInGeneric<String, String> checkInFlight = new CheckInGeneric<>();
+                checkInFlight.setData1(selectedFlight.toString());
+                checkInFlight.setData2("Checked In Confirmed");
+                LOGGER.info("YOUR FLIGHT: ");
+                checkInFlight.print();
+
                 selectedAccommodation.checkIn(client1);
+                CheckInGeneric<String, String> checkInAccommodation = new CheckInGeneric<>();
+                checkInAccommodation.setData1(selectedAccommodation.toString());
+                checkInAccommodation.setData2(" Checked In Confirmed");
+                LOGGER.info("YOUR ACCOMMODATION: ");
+                checkInAccommodation.print();
                 break;
             case 2:
                 LOGGER.info("You will have to check in manually");

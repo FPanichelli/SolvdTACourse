@@ -34,8 +34,8 @@ public class TravelAgency {
         apartmentList.put(name, new ApartmentRental(capacity, hasPrivateBathroom, hasWifi, adress, hasKitchen, amenities, nightlyPrice, city));
     }
 
-    public void addHotelRoom(String name, int capacity, boolean hasPrivateBathroom, boolean hasWifi, int roomNumber, boolean includeMeals, boolean housekeeping, boolean amenities, double nightlyPrice, Destination city) {
-        roomList.put(name, new HotelRoom(capacity, hasPrivateBathroom, hasWifi, roomNumber, includeMeals, housekeeping, amenities, nightlyPrice, city));
+    public void addHotelRoom(String name, int capacity, boolean hasPrivateBathroom, boolean hasWifi, String hotel, int roomNumber, boolean includeMeals, boolean housekeeping, boolean amenities, double nightlyPrice, Destination city) {
+        HotelRoom put = roomList.put(name, new HotelRoom(capacity, hasPrivateBathroom, hasWifi, hotel, roomNumber, includeMeals, housekeeping, amenities, nightlyPrice, city));
     }
 
     public void addRentedCar(int index, String model, String brand, int identifier, double dailyCost, boolean insured) {

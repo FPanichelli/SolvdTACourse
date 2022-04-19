@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 public class HotelRoom extends Accommodation {
     private final static Logger LOGGER = LogManager.getLogger(Runner.class);
-
+    private String hotel;
     private int roomNumber;
     private boolean includeMeals;
     private boolean housekeeping;
@@ -17,8 +17,9 @@ public class HotelRoom extends Accommodation {
     public HotelRoom() {
     }
 
-    public HotelRoom(int capacity, boolean hasPrivateBathroom, boolean hasWifi, int roomNumber, boolean includeMeals, boolean housekeeping, boolean amenities, double nightlyPrice, Destination city) {
+    public HotelRoom(int capacity, boolean hasPrivateBathroom, boolean hasWifi, String hotel, int roomNumber, boolean includeMeals, boolean housekeeping, boolean amenities, double nightlyPrice, Destination city) {
         super(capacity, hasPrivateBathroom, hasWifi, city, nightlyPrice);
+        this.hotel = hotel;
         this.roomNumber = roomNumber;
         this.includeMeals = includeMeals;
         this.housekeeping = housekeeping;
