@@ -7,6 +7,7 @@ import com.solvd.travelagency.*;
 import com.solvd.vehicles.*;
 import com.solvd.exceptions.*;
 import com.solvd.generics.*;
+import enums.EnumFlights;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -61,11 +62,13 @@ public class Runner {
 
         do {
             LOGGER.info("Please choose a flight" + "\n");
-            LOGGER.info("\n" + "1. " + travelAgency.getFlightList().get(0) + "\n" + "2. " + travelAgency.getFlightList().get(1) + "\n"
-                    + "3. " + travelAgency.getFlightList().get(2) + " (With Scales)" + "\n" + "4. Cancel Reservation");
-            LOGGER.info("-------------------------------------------------------------------------------------");
-            choice = scClient1.nextInt();
+            travelAgency.getFlightList().stream()
+                    .forEach(LOGGER::info);
 
+            LOGGER.info("4. Cancel Reservation");
+            LOGGER.info("-------------------------------------------------------------------------------------");
+
+            choice = scClient1.nextInt();
 
             switch (choice) {
                 case 1:
@@ -187,7 +190,8 @@ public class Runner {
 
         if (choice == 1) {
             LOGGER.info("This car models are available:");
-            LOGGER.info("\n" + "1. " + travelAgency.getRentedCarList().get(0) + "\n" + "2. " + travelAgency.getRentedCarList().get(1) + "\n" + "3. Cancel Reservation");
+            travelAgency.getRentedCarList().stream().forEach(LOGGER::info);
+            LOGGER.info("3. Cancel Reservation");
             LOGGER.info("-------------------------------------------------------------------------------------");
 
             choice = scClient1.nextInt();
@@ -221,7 +225,6 @@ public class Runner {
                 case 2:
                     selectedTaxi = travelAgency.getTaxiByIndex(1, travelAgency.getTaxiList().iterator());
                     break;
-
                 case 3:
                     throw new OrderCanceled("Order Cancelled");
                 default:
@@ -258,8 +261,12 @@ public class Runner {
         cr.takePayment(cashier);
 
         LOGGER.info("-------------------------------------------------------------------------------------");
-        LOGGER.info("Remaining from budget: " + client1.getBudget());
-        if (client1.getBudget() < 0) {
+        BudgetGeneric<Double> budgetGeneric = new BudgetGeneric();
+        budgetGeneric.setData(client1.getBudget());
+        LOGGER.info("Remaining from budget: ");
+        budgetGeneric.print();
+
+        if (budgetGeneric.getData() < 0) {
             throw new OverBudgetException("Your package is over budget");
         }
         LOGGER.info("-------------------------------------------------------------------------------------");
