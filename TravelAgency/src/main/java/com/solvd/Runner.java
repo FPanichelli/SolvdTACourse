@@ -2,6 +2,7 @@ package com.solvd;
 
 import java.util.*;
 
+import com.solvd.enums.*;
 import com.solvd.places.*;
 import com.solvd.travelagency.*;
 import com.solvd.vehicles.*;
@@ -71,15 +72,15 @@ public class Runner {
 
             switch (choice) {
                 case 1:
-                    LOGGER.info("Reserved " + "[ " + travelAgency.getFlightList().get(0) + " ]");
+                    LOGGER.info("Reserved " + "[ " + EnumFlights.BELARUS_AIRWAYS.getAirline() + " ]");
                     selectedFlight = travelAgency.getFlightList().get(0);
                     break;
                 case 2:
-                    LOGGER.info("Reserved " + "[ " + travelAgency.getFlightList().get(1) + " ]");
+                    LOGGER.info("Reserved " + "[ " + EnumFlights.QATAR_AIR.getAirline() + " ]");
                     selectedFlight = travelAgency.getFlightList().get(1);
                     break;
                 case 3:
-                    LOGGER.info("Reserved: " + "[ " + travelAgency.getFlightList().get(2) + " ]");
+                    LOGGER.info("Reserved: " + "[ " + EnumFlights.AEROLINEAS_ARGENTINAS.getAirline() + " ]");
                     selectedFlight = travelAgency.getFlightList().get(2);
                     break;
                 case 4:
@@ -123,11 +124,11 @@ public class Runner {
 
             switch (choice) {
                 case 1:
-                    LOGGER.info("Reserved " + "[ " + travelAgency.getRoomList().get("Premium") + " ]");
+                    LOGGER.info("Reserved " + "[ " + EnumHotelRoom.PREMIUM.getSuite() + " ]");
                     selectedAccommodation = travelAgency.getRoomList().get("Premium");
                     break;
                 case 2:
-                    LOGGER.info("Reserved " + "[ " + travelAgency.getRoomList().get("Economy") + " ]");
+                    LOGGER.info("Reserved " + "[ " + EnumHotelRoom.ECONOMY.getSuite() + " ]");
                     selectedAccommodation = travelAgency.getRoomList().get("Economy");
                     break;
                 case 3:
@@ -145,15 +146,15 @@ public class Runner {
 
             switch (choice) {
                 case 1:
-                    LOGGER.info("Reserved " + "[ " + travelAgency.getApartmentList().get("Centric") + " ]");
+                    LOGGER.info("Reserved " + "[ " + EnumApartments.CENTRIC.getName() + " ]");
                     selectedAccommodation = travelAgency.getApartmentList().get("Centric");
                     break;
                 case 2:
-                    LOGGER.info("Reserved " + "[ " + travelAgency.getApartmentList().get("Modest") + " ]");
+                    LOGGER.info("Reserved " + "[ " + EnumApartments.MODEST.getName() + " ]");
                     selectedAccommodation = travelAgency.getApartmentList().get("Modest");
                     break;
                 case 3:
-                    LOGGER.info("Reserved " + "[ " + travelAgency.getApartmentList().get("Luxury") + " ]");
+                    LOGGER.info("Reserved " + "[ " + EnumApartments.LUXURY.getName() + " ]");
                     selectedAccommodation = travelAgency.getApartmentList().get("Luxury");
                     break;
                 case 4:
@@ -197,12 +198,13 @@ public class Runner {
 
             switch (choice) {
                 case 1:
+                    LOGGER.info("Reserved " + "[ " + EnumRentalCars.MERCEDEZ.getModel() + " ]");
                     selectedVehicle = travelAgency.getRentedCarList().get(0);
                     break;
                 case 2:
+                    LOGGER.info("Reserved " + "[ " + EnumRentalCars.FORD.getModel() + " ]");
                     selectedVehicle = travelAgency.getRentedCarList().get(1);
                     break;
-
                 case 3:
                     throw new OrderCanceled("Order Cancelled");
                 default:
@@ -219,9 +221,11 @@ public class Runner {
 
             switch (choice) {
                 case 1:
+                    LOGGER.info("Reserved " + "[ " + EnumTaxis.TAXI.getCompany() + " ]");
                     selectedTaxi = travelAgency.getTaxiByIndex(0, travelAgency.getTaxiList().iterator());
                     break;
                 case 2:
+                    LOGGER.info("Reserved " + "[ " + EnumTaxis.UBER.getCompany() + " ]");
                     selectedTaxi = travelAgency.getTaxiByIndex(1, travelAgency.getTaxiList().iterator());
                     break;
                 case 3:
