@@ -2,6 +2,8 @@ package com.solvd;
 
 import java.util.*;
 
+import com.solvd.enums.*;
+import com.solvd.functionalinterfaces.*;
 import com.solvd.places.*;
 import com.solvd.travelagency.*;
 import com.solvd.vehicles.*;
@@ -44,42 +46,43 @@ public class Runner {
         travelAgency.addTaxi("UberX", "Chevrolet", 0, 10, false);
 
         Client client1 = new Client();
-        client1.setClientNumber(01);
+        IRegisterUser registerUser = (un) -> client1.setClientNumber(un);
+        registerUser.register(01);
         Scanner scClient1 = new Scanner(System.in);
         LOGGER.info("Enter name:");
         client1.setName(scClient1.nextLine());
         LOGGER.info("Enter Budget:");
         client1.setBudget(scClient1.nextDouble());
 
-
         LOGGER.info("How many days will you be travelling:");
         client1.setTripLength(scClient1.nextInt());
 
         LOGGER.info("Hello " + client1.getName() + ".");
         LOGGER.info("Please specify a couple preferences so I can provide you with a budget" + "\n");
-        LOGGER.info("-------------------------------------------------------------------------------------");
+
+        ISeparator s = () -> LOGGER.info("-------------------------------------------------------------------------------------");
+        s.separate();
 
         do {
             LOGGER.info("Please choose a flight" + "\n");
-            travelAgency.getFlightList().stream()
-                    .forEach(LOGGER::info);
+            travelAgency.getFlightList().stream().forEach(LOGGER::info);
 
             LOGGER.info("4. Cancel Reservation");
-            LOGGER.info("-------------------------------------------------------------------------------------");
+            s.separate();
 
             choice = scClient1.nextInt();
 
             switch (choice) {
                 case 1:
-                    LOGGER.info("Reserved " + "[ " + travelAgency.getFlightList().get(0) + " ]");
+                    LOGGER.info("Reserved " + "[ " + EnumFlights.BELARUS_AIRWAYS.getAirline() + " ]");
                     selectedFlight = travelAgency.getFlightList().get(0);
                     break;
                 case 2:
-                    LOGGER.info("Reserved " + "[ " + travelAgency.getFlightList().get(1) + " ]");
+                    LOGGER.info("Reserved " + "[ " + EnumFlights.QATAR_AIR.getAirline() + " ]");
                     selectedFlight = travelAgency.getFlightList().get(1);
                     break;
                 case 3:
-                    LOGGER.info("Reserved: " + "[ " + travelAgency.getFlightList().get(2) + " ]");
+                    LOGGER.info("Reserved: " + "[ " + EnumFlights.AEROLINEAS_ARGENTINAS.getAirline() + " ]");
                     selectedFlight = travelAgency.getFlightList().get(2);
                     break;
                 case 4:
@@ -87,14 +90,14 @@ public class Runner {
                 default:
                     throw new FlightNotFoundException("Flight Not Found");
             }
-            LOGGER.info("-------------------------------------------------------------------------------------");
+            s.separate();
 
         } while (choice > 4);
 
         do {
             LOGGER.info("What kind of accommodation would you like?" + "\n");
-            LOGGER.info("\n" + "1. Hotel" + "\n" + "2. Private Accommodation" + "\n" + "3. Cancel Reservation" + "\n" +
-                    "-------------------------------------------------------------------------------------");
+            LOGGER.info("\n" + "1. Hotel" + "\n" + "2. Private Accommodation" + "\n" + "3. Cancel Reservation");
+            s.separate();
             choice = scClient1.nextInt();
 
 
@@ -110,24 +113,24 @@ public class Runner {
                 default:
                     throw new InvalidSelection("Not an option");
             }
-            LOGGER.info("-------------------------------------------------------------------------------------");
+            s.separate();
 
         } while (choice > 3);
         if (choice == 1) {
             LOGGER.info("Following hotel rooms are available:");
             LOGGER.info("\n" + "1. " + travelAgency.getRoomList().get("Premium") +
                     "\n" + "2. " + travelAgency.getRoomList().get("Economy") + "\n" + "3. Cancel Reservation");
-            LOGGER.info("-------------------------------------------------------------------------------------");
+            s.separate();
 
             choice = scClient1.nextInt();
 
             switch (choice) {
                 case 1:
-                    LOGGER.info("Reserved " + "[ " + travelAgency.getRoomList().get("Premium") + " ]");
+                    LOGGER.info("Reserved " + "[ " + EnumHotelRoom.PREMIUM.getSuite() + " ]");
                     selectedAccommodation = travelAgency.getRoomList().get("Premium");
                     break;
                 case 2:
-                    LOGGER.info("Reserved " + "[ " + travelAgency.getRoomList().get("Economy") + " ]");
+                    LOGGER.info("Reserved " + "[ " + EnumHotelRoom.ECONOMY.getSuite() + " ]");
                     selectedAccommodation = travelAgency.getRoomList().get("Economy");
                     break;
                 case 3:
@@ -139,21 +142,21 @@ public class Runner {
             LOGGER.info("Following apartments are available for rent: ");
             LOGGER.info("\n" + "1. " + travelAgency.getApartmentList().get("Centric") + "\n" + "2. " + travelAgency.getApartmentList().get("Modest") + "\n"
                     + "3. " + travelAgency.getApartmentList().get("Luxury") + "\n" + "4. Cancel Reservation");
-            LOGGER.info("-------------------------------------------------------------------------------------");
+            s.separate();
 
             choice = scClient1.nextInt();
 
             switch (choice) {
                 case 1:
-                    LOGGER.info("Reserved " + "[ " + travelAgency.getApartmentList().get("Centric") + " ]");
+                    LOGGER.info("Reserved " + "[ " + EnumApartments.CENTRIC.getName() + " ]");
                     selectedAccommodation = travelAgency.getApartmentList().get("Centric");
                     break;
                 case 2:
-                    LOGGER.info("Reserved " + "[ " + travelAgency.getApartmentList().get("Modest") + " ]");
+                    LOGGER.info("Reserved " + "[ " + EnumApartments.MODEST.getName() + " ]");
                     selectedAccommodation = travelAgency.getApartmentList().get("Modest");
                     break;
                 case 3:
-                    LOGGER.info("Reserved " + "[ " + travelAgency.getApartmentList().get("Luxury") + " ]");
+                    LOGGER.info("Reserved " + "[ " + EnumApartments.LUXURY.getName() + " ]");
                     selectedAccommodation = travelAgency.getApartmentList().get("Luxury");
                     break;
                 case 4:
@@ -162,11 +165,11 @@ public class Runner {
                     throw new ApartmentRentalNotFound("Apartment not found");
             }
         }
-        LOGGER.info("-------------------------------------------------------------------------------------");
+        s.separate();
         do {
             LOGGER.info("Would you like to rent a car (Pay per day) or Book a cab (One Payment)" + "\n");
             LOGGER.info("\n" + "1. Rent a Car" + "\n" + "2. Take a Cab to and from airport" + "\n" + "3. Cancel Reservation");
-            LOGGER.info("-------------------------------------------------------------------------------------");
+            s.separate();
             choice = scClient1.nextInt();
 
 
@@ -184,25 +187,26 @@ public class Runner {
                 default:
                     throw new InvalidSelection("Not an option");
             }
-            LOGGER.info("-------------------------------------------------------------------------------------");
+            s.separate();
         } while (choice > 3);
 
         if (choice == 1) {
             LOGGER.info("This car models are available:");
             travelAgency.getRentedCarList().stream().forEach(LOGGER::info);
             LOGGER.info("3. Cancel Reservation");
-            LOGGER.info("-------------------------------------------------------------------------------------");
+            s.separate();
 
             choice = scClient1.nextInt();
 
             switch (choice) {
                 case 1:
+                    LOGGER.info("Reserved " + "[ " + EnumRentalCars.MERCEDEZ.getModel() + " ]");
                     selectedVehicle = travelAgency.getRentedCarList().get(0);
                     break;
                 case 2:
+                    LOGGER.info("Reserved " + "[ " + EnumRentalCars.FORD.getModel() + " ]");
                     selectedVehicle = travelAgency.getRentedCarList().get(1);
                     break;
-
                 case 3:
                     throw new OrderCanceled("Order Cancelled");
                 default:
@@ -213,15 +217,17 @@ public class Runner {
             LOGGER.info("\n" + "1. " + travelAgency.getTaxiByIndex(0, travelAgency.getTaxiList().iterator())
                     + "\n" + "2. " + travelAgency.getTaxiByIndex(1, travelAgency.getTaxiList().iterator())
                     + "\n" + "3. Cancel Reservation");
-            LOGGER.info("-------------------------------------------------------------------------------------");
+            s.separate();
 
             choice = scClient1.nextInt();
 
             switch (choice) {
                 case 1:
+                    LOGGER.info("Reserved " + "[ " + EnumTaxis.TAXI.getCompany() + " ]");
                     selectedTaxi = travelAgency.getTaxiByIndex(0, travelAgency.getTaxiList().iterator());
                     break;
                 case 2:
+                    LOGGER.info("Reserved " + "[ " + EnumTaxis.UBER.getCompany() + " ]");
                     selectedTaxi = travelAgency.getTaxiByIndex(1, travelAgency.getTaxiList().iterator());
                     break;
                 case 3:
@@ -240,7 +246,7 @@ public class Runner {
             selectedVehicle.charge(client1);
             selectedVehicle.book();
         } else {
-            LOGGER.info("Your Package" + "\n" + "Flight: " + selectedFlight
+            LOGGER.info("Your Package:" + "\n" + "Flight: " + selectedFlight
                     + "\n" + "Accommodation: " + selectedAccommodation + "\n" + "Transport: " + selectedTaxi + "\n" + "Total: $" + client1.getPackageTotal());
             selectedAccommodation.charge(client1);
             selectedAccommodation.book();
@@ -259,7 +265,7 @@ public class Runner {
         cashier.setPayment(cashier.getPayment());
         cr.takePayment(cashier);
 
-        LOGGER.info("-------------------------------------------------------------------------------------");
+        s.separate();
         BudgetGeneric<Double> budgetGeneric = new BudgetGeneric();
         budgetGeneric.setData(client1.getBudget());
         LOGGER.info("Remaining from budget: ");
@@ -268,7 +274,7 @@ public class Runner {
         if (budgetGeneric.getData() < 0) {
             throw new OverBudgetException("Your package is over budget");
         }
-        LOGGER.info("-------------------------------------------------------------------------------------");
+        s.separate();
 
         LOGGER.info("Would you like to Check in?");
         LOGGER.info("1. Yes | 2. No, i'll do it later");
@@ -296,9 +302,10 @@ public class Runner {
             default:
                 throw new InvalidSelection("Not an option");
         }
-        LOGGER.info("-------------------------------------------------------------------------------------");
+        s.separate();
         client1.travelling();
-        LOGGER.info("Have a safe flight and enjoy your trip!");
 
+        IFarewell farewell = (n) -> LOGGER.info(n + ", we wish you a safe flight and a great your trip!");
+        farewell.message(client1.getName());
     }
 }

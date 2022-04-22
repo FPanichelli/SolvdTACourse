@@ -41,7 +41,6 @@ public class Flight extends Vehicle implements ICheckIn, IBook {
     }
 
 
-
     @Override
     public void book() {
         setBooked(true);
