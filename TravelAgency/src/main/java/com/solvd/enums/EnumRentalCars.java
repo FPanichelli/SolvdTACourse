@@ -1,8 +1,8 @@
 package com.solvd.enums;
 
 public enum EnumRentalCars {
-    MERCEDEZ(1,"Mercedez Benz CLA-200"),
-    FORD(2,"Ford Focus");
+    MERCEDEZ(1, "Mercedez Benz CLA-200"),
+    FORD(2, "Ford Focus");
 
 
     private int number;

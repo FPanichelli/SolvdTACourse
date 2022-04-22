@@ -18,6 +18,7 @@ public class CashRegister {
     public void setRegisterTotal(double registerTotal) {
         this.registerTotal = registerTotal;
     }
+
     public void takePayment(Cashier cashier) {
         setRegisterTotal(getRegisterTotal() + cashier.getPayment());
         cashier.setPayment(0);
