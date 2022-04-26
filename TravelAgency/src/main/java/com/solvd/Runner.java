@@ -1,6 +1,7 @@
 package com.solvd;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import com.solvd.enums.*;
 import com.solvd.functionalinterfaces.*;
@@ -65,8 +66,7 @@ public class Runner {
 
         do {
             LOGGER.info("Please choose a flight" + "\n");
-            travelAgency.getFlightList().stream().forEach(LOGGER::info);
-
+            travelAgency.getFlightList().stream().forEach(flight -> LOGGER.info(travelAgency.getFlightList().indexOf(flight)+1 + ". " + flight));
             LOGGER.info("4. Cancel Reservation");
             s.separate();
 
@@ -118,8 +118,8 @@ public class Runner {
         } while (choice > 3);
         if (choice == 1) {
             LOGGER.info("Following hotel rooms are available:");
-            LOGGER.info("\n" + "1. " + travelAgency.getRoomList().get("Premium") +
-                    "\n" + "2. " + travelAgency.getRoomList().get("Economy") + "\n" + "3. Cancel Reservation");
+            travelAgency.getRoomList().forEach((name, room) -> LOGGER.info(travelAgency.getRoomList().values().
+                    stream().collect(Collectors.toList()).indexOf(room)+ 1 + ". " + room));
             s.separate();
 
             choice = scClient1.nextInt();
@@ -140,8 +140,8 @@ public class Runner {
             }
         } else if (choice == 2) {
             LOGGER.info("Following apartments are available for rent: ");
-            LOGGER.info("\n" + "1. " + travelAgency.getApartmentList().get("Centric") + "\n" + "2. " + travelAgency.getApartmentList().get("Modest") + "\n"
-                    + "3. " + travelAgency.getApartmentList().get("Luxury") + "\n" + "4. Cancel Reservation");
+            travelAgency.getApartmentList().forEach((name, apartment) -> LOGGER.info(travelAgency.getApartmentList().values().
+                    stream().collect(Collectors.toList()).indexOf(apartment)+ 1 + ". " + apartment));
             s.separate();
 
             choice = scClient1.nextInt();
@@ -192,7 +192,8 @@ public class Runner {
 
         if (choice == 1) {
             LOGGER.info("This car models are available:");
-            travelAgency.getRentedCarList().stream().forEach(LOGGER::info);
+            travelAgency.getRentedCarList().stream().forEach(rentedCar -> LOGGER.info(travelAgency.getRentedCarList().
+                    indexOf(rentedCar)+1 + ". " + rentedCar));
             LOGGER.info("3. Cancel Reservation");
             s.separate();
 
@@ -214,9 +215,8 @@ public class Runner {
             }
         } else if (choice == 2) {
             LOGGER.info("Options are Taxi or Uber:");
-            LOGGER.info("\n" + "1. " + travelAgency.getTaxiByIndex(0, travelAgency.getTaxiList().iterator())
-                    + "\n" + "2. " + travelAgency.getTaxiByIndex(1, travelAgency.getTaxiList().iterator())
-                    + "\n" + "3. Cancel Reservation");
+            travelAgency.getTaxiList().forEach(taxi -> LOGGER.info(travelAgency.getTaxiList().
+                    stream().collect(Collectors.toList()).indexOf(taxi) + 1 + ". " + taxi));
             s.separate();
 
             choice = scClient1.nextInt();
