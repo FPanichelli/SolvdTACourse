@@ -15,7 +15,8 @@ public class ThreadRunner {
     private static User user4 = new User();
 
     public static void main(String[] args) {
-        ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
+        ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.
+                newFixedThreadPool(4);
         user1.setConnected(true);
         user2.setConnected(true);
         user3.setConnected(true);

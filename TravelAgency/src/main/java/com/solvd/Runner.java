@@ -66,7 +66,7 @@ public class Runner {
 
         do {
             LOGGER.info("Please choose a flight" + "\n");
-            travelAgency.getFlightList().stream().forEach(flight -> LOGGER.info(travelAgency.getFlightList().indexOf(flight)+1 + ". " + flight));
+            travelAgency.getFlightList().stream().forEach(flight -> LOGGER.info(travelAgency.getFlightList().indexOf(flight) + 1 + ". " + flight));
             LOGGER.info("4. Cancel Reservation");
             s.separate();
 
@@ -119,7 +119,7 @@ public class Runner {
         if (choice == 1) {
             LOGGER.info("Following hotel rooms are available:");
             travelAgency.getRoomList().forEach((name, room) -> LOGGER.info(travelAgency.getRoomList().values().
-                    stream().collect(Collectors.toList()).indexOf(room)+ 1 + ". " + room));
+                    stream().collect(Collectors.toList()).indexOf(room) + 1 + ". " + room));
             s.separate();
 
             choice = scClient1.nextInt();
@@ -141,7 +141,7 @@ public class Runner {
         } else if (choice == 2) {
             LOGGER.info("Following apartments are available for rent: ");
             travelAgency.getApartmentList().forEach((name, apartment) -> LOGGER.info(travelAgency.getApartmentList().values().
-                    stream().collect(Collectors.toList()).indexOf(apartment)+ 1 + ". " + apartment));
+                    stream().collect(Collectors.toList()).indexOf(apartment) + 1 + ". " + apartment));
             s.separate();
 
             choice = scClient1.nextInt();
@@ -193,7 +193,7 @@ public class Runner {
         if (choice == 1) {
             LOGGER.info("This car models are available:");
             travelAgency.getRentedCarList().stream().forEach(rentedCar -> LOGGER.info(travelAgency.getRentedCarList().
-                    indexOf(rentedCar)+1 + ". " + rentedCar));
+                    indexOf(rentedCar) + 1 + ". " + rentedCar));
             LOGGER.info("3. Cancel Reservation");
             s.separate();
 

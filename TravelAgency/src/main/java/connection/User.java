@@ -4,7 +4,7 @@ import com.solvd.Runner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class User extends Thread{
+public class User extends Thread {
     private final static Logger LOGGER = LogManager.getLogger(User.class);
 
     private String connection = ("Connected successfully");
